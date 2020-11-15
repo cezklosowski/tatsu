@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -27,8 +29,14 @@ public class PersonRestControllerTest2 {
 	@Test
 	public void shouldReturnListOfPersons() {
 		// given
+		String url = "http://localhost:" + port + "/api/person/";
 		// when
+		List<PersonDto> response = List.of(this.restTemplate.getForObject(url, PersonDto[].class));
 		// then
+		assertThat(response)
+				.isNotEmpty()
+				.hasSize(2);
+		assertThat(response.get(0).getName()).isEqualTo("Michał");
 	}
 
 }

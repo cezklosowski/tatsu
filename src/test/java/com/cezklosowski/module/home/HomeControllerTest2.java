@@ -20,15 +20,21 @@ public class HomeControllerTest2 {
 	@Test
 	public void shouldReturnHelloWorld() {
 		// given
+		String url = "http://localhost:" + port + "/hello";
 		// when
+		String response = this.restTemplate.getForObject(url, String.class);
 		// then
+		assertThat(response).isEqualTo("Hello World");
 	}
 
 	@Test
 	public void shouldReturnGoAway() {
 		// given
+		String url = "http://localhost:" + port + "/by";
 		// when
+		String response = this.restTemplate.getForObject(url, String.class);
 		// then
+		assertThat(response).isEqualTo("Go away");
 	}
 
 }
